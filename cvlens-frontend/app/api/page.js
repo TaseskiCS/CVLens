@@ -31,7 +31,7 @@ export default async function Page() {
             <h3 className="font-semibold flex items-center text-gray-700 ">
               <span className="mr-2">⚡</span> Fast Processing
             </h3>
-            <p className="text-gray-600 mt-2">Parse resumes in milliseconds with high accuracy</p>
+            <p className="text-gray-600 mt-2">Parse resumes in seconds with high accuracy</p>
           </div>
         </section>
   
@@ -41,16 +41,16 @@ export default async function Page() {
           <div className="mt-4 space-y-4">
             <div className="p-4 bg-gray-100 rounded-lg flex justify-between items-center">
               <div>
-                <span className="px-3 py-1 bg-blue-500 text-white rounded-md text-xs">UPLOAD</span>
-                <code className="ml-2 text-gray-700">/api/v1/parse</code>
+                <span className="UPLAOD BLUE px-3 p-1 bg-blue-500 text-white rounded-md text-xs">UPLOAD</span>
+                <code className="ml-2 text-gray-700">scanner</code>
                 <p className="text-gray-600 text-sm">Parse and extract information from resume documents</p>
               </div>
               <button className="px-4 py-2 bg-blue-500 rounded-md text ">Try it</button>
             </div>
             <div className="p-4 bg-gray-100 rounded-lg flex justify-between items-center">
               <div>
-                <span className="px-3 py-1 bg-green-500 text-white rounded-md text-xs">RECIEVE</span>
-                <code className="ml-2 text-gray-700">/api/v1/formats</code>
+                <span className="RECEIVE GREEN px-3 p-1 bg-green-500 text-white rounded-md text-xs">RECIEVE</span>
+                <code className="ml-2 text-gray-700">formatted information</code>
                 <p className="text-gray-600 text-sm">Get supported resume file formats and limitations</p>
               </div>
               <button className="px-4 py-2 bg-green-500 rounded-md text ">Try it</button>
