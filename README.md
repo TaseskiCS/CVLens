@@ -14,7 +14,7 @@ The following describes the flow of data in the system:
     - Users can retrieve processed data via a GET request (/parsedData).
 
 
-### 🎒 Backend (Node, Express.js)
+### 🎒 Backend (Python, FastAPI)
     - Receives the file from the frontend.
     - Uploads the file to an AWS S3 bucket.
     - Responds to frontend requests for parsed data.
