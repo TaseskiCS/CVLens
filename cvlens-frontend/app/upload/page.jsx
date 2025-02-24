@@ -6,21 +6,23 @@ const UploadPage = () => {
   return (
     <>
         <NavBar/>
-        <div className="flex justify-center flex-col">
+        <div className="flex justify-center flex-col mt-5">
             <div className="flex flex-col justify-center text-center">
                 <h1 className="text-3xl font-bold">Upload Your Resume</h1>
                 <h2>Let Our AI analyze and optimize your resume for better jobs opportunities</h2>
             </div>
-            <div className='flex items-center flex-col mt-10'>
-                <div className='bg-slate-400 p-5 rounded-xl'>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-                    </svg>
+            <div className='flex items-center flex-col mt-5'>
+                <div className="DRAG-DROP flex items-center flex-col bg-slate-100 p-5 rounded-xl mb-5">
+                    <div className='bg-slate-400 p-5 rounded-xl'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                        </svg>
+                    </div>
+                    <h2 className="font-bold">Drag and drop your resume here</h2>
+                    <h3 className='mt-5'>Or</h3>
+                    <button className='bg-black rounded-xl text-white p-3 text-sm mt-2'>Browse Files</button>
+                    <h3 className='mt-5'>Supported Formats: PDF, DOCX (Max 5MB)</h3>
                 </div>
-                <h2 className="font-bold">Drag and drop your resume here</h2>
-                <h3 className='mt-5'>Or</h3>
-                <button className='bg-black rounded-xl text-white p-3 text-sm mt-2'>Browse Files</button>
-                <h3 className='mt-5'>Supported Formats: PDF, DOCX (Max 5MB)</h3>
                 <div className="flex flex-wrap gap-3">
                     <InfoCard 
                         icon="/svg/bolt.svg" 
