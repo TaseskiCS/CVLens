@@ -1,11 +1,12 @@
 import React from "react";
+import InfoCard from "../components/InfoCard/InfoCard";
 
 export default function AboutUs() {
   const team = [
-    { name: "Gurshan Sidhar", role: "Software Engineer", img: "#" },
-    { name: "Tony Taseski", role: "Software Engineer", img: "#" },
-    { name: "Michael Marsillo", role: "Software Engineer", img: "#" },
-    { name: "Max Posadas", role: "Software Engineer", img: "#" },
+    { name: "Gurshan Sidhar", role: "Full Stack Engineer", img: "#" },
+    { name: "Antonio Taseski", role: "CTO, Founder", img: "#" },
+    { name: "Michael Marsillo", role: "Full Stack Engineer", img: "#" },
+    { name: "Max Posadas", role: "ML Engineer", img: "#" },
   ];
   return (
     <div className="min-h-screen bg-gray-50">
@@ -28,7 +29,6 @@ export default function AboutUs() {
           {team.map((member, index) => (
             <div
               key={index}
-              className="bg-white shadow-lg rounded-2xl p-6 text-center"
             >
               <img
                 src={member.img}
