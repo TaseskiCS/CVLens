@@ -1,15 +1,10 @@
+import NavBar from "../components/Navbar/NavBar";
+import InfoCard from "../components/InfoCard/InfoCard";
+
 export default async function Page() {
     return (
       <div className="min-h-screen bg-gray-100">
-        {/* Navbar */}
-        <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        <div className="flex items-center space-x-6">
-        <span className="text-xl font-bold text-black">CVLens</span>
-        <a href="#" className="text-gray-700 hover:text-blue-500">Home</a>
-        <a href="#" className="text-gray-700 hover:text-blue-500">API</a>
-        <a href="#" className="text-gray-700 hover:text-blue-500">About Us</a>
-        </div>
-        </nav>
+        <NavBar/>
   
         {/* Header */}
         <header className="text-center py-16">
@@ -19,12 +14,15 @@ export default async function Page() {
   
         {/* API Overview */}
         <section className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
-          <div className="p-6 bg-white shadow-md rounded-lg">
+          {/* <div className="p-6 bg-white shadow-md rounded-lg">
             <h3 className="font-semibold flex items-center text-gray-700">
               <span className="mr-2">💻</span> Simple Integration
             </h3>
             <p className="text-gray-600 mt-2">Easy-to-use RESTful API endpoints with comprehensive documentation</p>
-          </div>
+          </div> */}
+
+          <InfoCard icon= "/svg/bolt.svg" title="Simple Integration" text="Easy-to-use RESTful API endpoints with comprehensive documentation"/> 
+
           <div className="p-6 bg-white shadow-md rounded-lg">
             <h3 className="font-semibold flex items-center text-gray-700 ">
               <span className="mr-2">⚡</span> Fast Processing
