@@ -9,7 +9,7 @@ const NavBar = () => {
           </div>
           <div className='flex gap-10'>
             <button className="font-bold">Home</button>
-            <button className="font-bold">Parse Resume</button>
+            <button className="font-bold">API</button>
           </div>
         </div>
         <div className="mr-20 font-bold">
