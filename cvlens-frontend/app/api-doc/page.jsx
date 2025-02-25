@@ -14,21 +14,9 @@ export default async function Page() {
   
         {/* API Overview */}
         <section className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
-          {/* <div className="p-6 bg-white shadow-md rounded-lg">
-            <h3 className="font-semibold flex items-center text-gray-700">
-              <span className="mr-2">💻</span> Simple Integration
-            </h3>
-            <p className="text-gray-600 mt-2">Easy-to-use RESTful API endpoints with comprehensive documentation</p>
-          </div> */}
 
-          <InfoCard icon= "/svg/bolt.svg" title="Simple Integration" text="Easy-to-use RESTful API endpoints with comprehensive documentation"/> 
-
-          <div className="p-6 bg-white shadow-md rounded-lg">
-            <h3 className="font-semibold flex items-center text-gray-700 ">
-              <span className="mr-2">⚡</span> Fast Processing
-            </h3>
-            <p className="text-gray-600 mt-2">Parse resumes in seconds with high accuracy</p>
-          </div>
+          <InfoCard icon= "/svg/verify.svg" title="Simple Integration" text="Easy-to-use RESTful API endpoints with comprehensive documentation"/> 
+          <InfoCard icon= "/svg/timer.svg" title="Fast Processing" text="Parse resumes in seconds with high accuracy"/> 
         </section>
   
         {/* API Endpoints */}
@@ -41,7 +29,7 @@ export default async function Page() {
                 <code className="ml-2 text-gray-700">scanner</code>
                 <p className="text-gray-600 text-sm">Parse and extract information from resume documents</p>
               </div>
-              <button className="px-4 py-2 bg-blue-500 rounded-md text ">Try it</button>
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-md text ">Try it</button>
             </div>
             <div className="p-4 bg-gray-100 rounded-lg flex justify-between items-center">
               <div>
@@ -49,7 +37,7 @@ export default async function Page() {
                 <code className="ml-2 text-gray-700">formatted information</code>
                 <p className="text-gray-600 text-sm">Get supported resume file formats and limitations</p>
               </div>
-              <button className="px-4 py-2 bg-green-500 rounded-md text ">Try it</button>
+              <button className="px-4 py-2 bg-green-500 text-white rounded-md text ">Try it</button>
             </div>
           </div>
         </section>
