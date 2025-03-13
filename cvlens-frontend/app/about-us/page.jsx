@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { Github, Linkedin, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import NavBar from "../components/Navbar/NavBar"
 
 // Animation variants
 const fadeIn = {
@@ -123,9 +124,11 @@ export default function AboutUs() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-navy-900 via-navy-400 to-white">
+    <>
+      <NavBar/>
+      <div className="min-h-screen bg-[url('/images/wlu.jpg')] h-32 bg-cover  bg-center">
       {/* Header */}
-      <motion.header initial="hidden" animate="visible" variants={staggerContainer} className="text-center py-24 px-4">
+      <motion.header initial="hidden" animate="visible" variants={staggerContainer} className="backdrop-blur-sm text-center py-24 px-4">
         <motion.div variants={fadeIn}>
           <h1 className="text-5xl font-bold text-white mb-6 tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-navy-200">Our Story</span>
@@ -223,6 +226,10 @@ export default function AboutUs() {
       </motion.section>
 
     </div>
+
+    
+    </>
+    
   )
 }
 
