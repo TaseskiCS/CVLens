@@ -39,7 +39,7 @@ export default function Page() {
           <p className="text-xl mt-2 text-slate-300">Powerful resume parsing API for seamless application automation</p>
           <motion.div className="mt-8" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-8 py-6 rounded-xl text-lg font-medium inline-flex items-center cursor-pointer">
-              Get Started <ChevronRight className="ml-2" href="/upload" />
+              Get Started <ChevronRight className="ml-2" />
             </div>
           </motion.div>
         </motion.div>
@@ -56,14 +56,14 @@ export default function Page() {
         >
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon={<Check className="h-10 w-10 text-blue-500" />}
+              icon="🚀"
               title="Simple Integration"
               text="Easy-to-use RESTful API endpoints with comprehensive documentation"
             />
           </motion.div>
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon={<Clock className="h-10 w-10 text-blue-500" />}
+              icon="⚡"
               title="Fast Processing"
               text="Parse resumes in seconds with high accuracy and precision"
             />
