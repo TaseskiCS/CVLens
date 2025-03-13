@@ -56,14 +56,14 @@ export default function Page() {
         >
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon={<Check className="h-10 w-10 text-blue-500" />}
+              icon='zap'
               title="Simple Integration"
               text="Easy-to-use RESTful API endpoints with comprehensive documentation"
             />
           </motion.div>
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon={<Clock className="h-10 w-10 text-blue-500" />}
+              icon='zap'
               title="Fast Processing"
               text="Parse resumes in seconds with high accuracy and precision"
             />
