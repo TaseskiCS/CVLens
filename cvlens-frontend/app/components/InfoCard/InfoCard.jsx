@@ -11,6 +11,7 @@ const InfoCard = ({ icon, title, text }) => {
   // Handle special cases with dashes in the name by converting to PascalCase
   const getIconComponent = (iconName) => {
     // Convert kebab-case to PascalCase (e.g., "check-circle" to "CheckCircle")
+    if (!iconName) return;
     const pascalCase = iconName.split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
