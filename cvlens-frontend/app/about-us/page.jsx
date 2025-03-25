@@ -4,7 +4,8 @@ import { Github, Linkedin, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import NavBar from "../components/Navbar/NavBar"
-
+import InfoCard from "../components/InfoCard/InfoCard"
+import { useState, useEffect } from "react"
 // Animation variants
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -64,26 +65,13 @@ const TeamCard = ({ name, role, image, socials }) => {
 }
 
 // Value Card Component
-const ValueCard = ({ icon, title, description }) => {
-  return (
-    <motion.div
-      variants={fadeIn}
-      className="p-6 bg-white shadow-md rounded-xl border border-navy-100 hover:shadow-lg transition-all duration-300"
-    >
-      <h3 className="font-semibold flex items-center text-navy-800 text-lg">
-        <span className="mr-2">{icon}</span>
-        {title}
-      </h3>
-      <p className="text-navy-600 mt-2">{description}</p>
-    </motion.div>
-  )
-}
+
 
 export default function AboutUs() {
   const team = [
     {
       name: "Gurshan Sidhar",
-      role: "Full Stack Engineer",
+      role: "Frontend",
       image: "/images/gurshan_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/gurshan-sidhar",
@@ -93,7 +81,7 @@ export default function AboutUs() {
     },
     {
       name: "Antonio Taseski",
-      role: "CTO, Founder",
+      role: "Full Stack, ML",
       image: "/images/tony_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/antonio-taseski-8ba015290/",
@@ -103,7 +91,7 @@ export default function AboutUs() {
     },
     {
       name: "Michael Marsillo",
-      role: "Full Stack Engineer",
+      role: "Frontend",
       image: "/images/mike_linkedin.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/michaelmarsillo/",
@@ -113,7 +101,7 @@ export default function AboutUs() {
     },
     {
       name: "Max Posadas",
-      role: "ML Engineer",
+      role: "ML",
       image: "/images/max_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/maxwell-posadas8/",
@@ -123,46 +111,122 @@ export default function AboutUs() {
     },
   ]
 
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+    setIsMobile(window.innerWidth < 768)
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
   return (
     <>
-      <NavBar/>
-      <div className="min-h-screen bg-[url('/images/wlu.jpg')] h-32 bg-cover  bg-center">
-      {/* Header */}
-      <motion.header initial="hidden" animate="visible" variants={staggerContainer} className="backdrop-blur-sm text-center py-24 px-4">
-        <motion.div variants={fadeIn}>
-          <h1 className="text-5xl font-bold text-white mb-6 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-navy-200">Our Story</span>
-          </h1>
-        </motion.div>
-
-        <motion.div variants={fadeIn} className="flex justify-center items-center mb-10">
-          <div className="relative h-80 w-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
-            <Image src="/images/gurshan_linkedin.jpeg" alt="Team" fill className="object-cover" />
-          </div>
-        </motion.div>
-
-        <motion.div variants={fadeIn} className="text-center max-w-4xl mx-auto">
-          <div className="bg-white bg-opacity-90 p-8 rounded-xl shadow-xl">
-            <p className="text-navy-800 text-lg leading-relaxed">
-              We are four second-year computer science students working on <strong>CVLens</strong>, a project born from
-              our passion for technology and innovation. Driven by our love for problem-solving and our desire to create
-              something impactful, we set out to develop a tool that pushes the boundaries of computer vision.
-              Collaboration is at the heart of our work—we each bring unique skills and perspectives, combining our
-              strengths to tackle challenges and refine our ideas. Through <strong>CVLens</strong>, we aim to not only
-              deepen our understanding of CS but also build something meaningful that can make a real difference.
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div variants={fadeIn} className="mt-10">
-          <Link
-            href="#team"
-            className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-navy-700 to-navy-500 text-white font-medium shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
+      <NavBar />
+      <div className="min-h-screen bg-[url('/images/wlu.jpg')] bg-cover bg-center relative">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 bg-black/30 backdrop-filter"></div>
+        <div className="relative z-10 flex items-center justify-center h-screen">
+          <div className="max-w-6xl w-full px-4 backdrop-blur-sm py-16 rounded-xl bg-black/10">
+            {/* Initial centered logo that moves left */}
+            <motion.div
+            className="flex flex-col items-center w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            Meet Our Team
-          </Link>
-        </motion.div>
-      </motion.header>
+            <div className="w-full flex justify-center overflow-hidden">
+              <motion.div
+                className="flex flex-col justify-center lg:flex-row items-center w-full lg:w-auto"
+                initial={{ x: 0 }}
+                animate={
+                  isLoaded
+                    ? {
+                        x: isMobile ? 0 : '0',
+                        y: isMobile ? 0 : 0,
+                      }
+                    : { x: 0, y: 0 }
+                }
+                transition={{
+                  duration: 1.8,
+                  delay: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  type: "spring",
+                  stiffness: 50,
+                  damping: 20,
+                }}
+              >
+                {/* Logo */}
+                <motion.div
+                  className="relative h-40 w-40 lg:h-64 lg:w-64 transform mb-6 lg:mb-0"
+                  initial={{ scale: 1.2 }}
+                  animate={isLoaded ? { scale: 1, rotate: 0 } : { scale: 1.2 }}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.5,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15,
+                  }}
+                >
+                  <Image
+                    src="/images/cvlens-logo.png"
+                    alt="CVLens Logo"
+                    fill
+                    className="object-contain drop-shadow-xl rounded-full"
+                  />
+                </motion.div>
+
+                {/* Text that appears */}
+                <motion.div
+                  className="text-center lg:text-left lg:ml-12 w-full lg:w-[500px] px-4 lg:px-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{
+                    duration: 1,
+                    delay: isMobile ? 0.1 : 0.4,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20,
+                  }}
+                >
+                  <motion.h1
+                    className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.7, delay: isMobile ? 0.2 : 0.6 }}
+                  >
+                    More About{" "}
+                    <motion.span
+                      className="text-blue-400"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.7, delay: isMobile ? 0.4 : 0.8, type: "spring" }}
+                    >
+                      CVLens
+                    </motion.span>
+                  </motion.h1>
+                  <motion.p
+                    className="text-base md:text-lg lg:text-xl text-white/90 max-w-xl mx-auto lg:mx-0 drop-shadow-md"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2, delay: isMobile ? 0.2 : 0.4 }}
+                  >
+                    Our project that we built to help companies better extract the important data from Resumes
+                  </motion.p>
+                </motion.div>
+              </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
 
       {/* Meet Our Team */}
       <motion.section
@@ -170,20 +234,77 @@ export default function AboutUs() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        variants={staggerContainer}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.15,
+              delayChildren: 0.2,
+              ease: "easeOut",
+              duration: 0.8,
+            },
+          },
+        }}
         className="py-20 px-6 bg-white"
       >
-        <motion.h2 variants={fadeIn} className="text-4xl font-bold text-navy-900 text-center mb-2">
+        <motion.h2
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          className="text-4xl font-bold text-navy-900 text-center mb-2"
+        >
           Meet Our Team
         </motion.h2>
 
-        <motion.p variants={fadeIn} className="text-navy-600 text-center mb-16">
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          className="text-navy-600 text-center mb-16"
+        >
           Driven by innovation and guided by experience
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {team.map((member, index) => (
-            <TeamCard key={index} name={member.name} image={member.image} role={member.role} socials={member.socials} />
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.22, 1, 0.36, 1],
+                  },
+                },
+              }}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.3, ease: "easeOut" },
+              }}
+            >
+              <TeamCard name={member.name} image={member.image} role={member.role} socials={member.socials} />
+            </motion.div>
           ))}
         </div>
       </motion.section>
@@ -193,43 +314,99 @@ export default function AboutUs() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        variants={staggerContainer}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.15,
+              delayChildren: 0.2,
+              ease: "easeOut",
+              duration: 0.8,
+            },
+          },
+        }}
         className="py-20 px-6 bg-gradient-to-b from-white to-navy-50"
       >
-        <motion.h2 variants={fadeIn} className="text-3xl font-bold text-navy-900 text-center mb-2">
+        <motion.h2
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          className="text-3xl font-bold text-navy-900 text-center mb-2"
+        >
           Our Values
         </motion.h2>
 
-        <motion.p variants={fadeIn} className="text-navy-600 text-center mb-16">
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          className="text-navy-600 text-center mb-16"
+        >
           The principles that guide everything we do
         </motion.p>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <ValueCard
-            icon="💡"
-            title="Innovation"
-            description="We push boundaries and embrace new ideas to create cutting-edge solutions."
-          />
-
-          <ValueCard
-            icon="👥"
-            title="Collaboration"
-            description="Together we achieve more through open communication and teamwork."
-          />
-
-          <ValueCard
-            icon="🚀"
-            title="Passion"
-            description="We love what we do and bring enthusiasm to every challenge we face."
-          />
+          {[
+            {
+              icon: "lightbulb",
+              title: "Innovation",
+              text: "We push boundaries and embrace new ideas to create cutting-edge solutions.",
+            },
+            {
+              icon: "users",
+              title: "Collaboration",
+              text: "Together we achieve more through open communication and teamwork.",
+            },
+            {
+              icon: "rocket",
+              title: "Passion",
+              text: "We love what we do and bring enthusiasm to every challenge we face.",
+            },
+          ].map((card, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 50, scale: 0.95 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.22, 1, 0.36, 1],
+                  },
+                },
+              }}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                transition: { duration: 0.3, ease: "easeOut" },
+              }}
+            >
+              <InfoCard icon={card.icon} title={card.title} text={card.text} />
+            </motion.div>
+          ))}
         </div>
       </motion.section>
-
-    </div>
-
-    
     </>
-    
   )
 }
 
