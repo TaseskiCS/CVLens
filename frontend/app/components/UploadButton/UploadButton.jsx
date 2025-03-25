@@ -1,17 +1,79 @@
-import React from 'react'
+"use client"
 
-const UploadButton = () => {
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Upload, ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation" // Import the router
+
+const UploadButton = ({ variant = "default" }) => {
+  const router = useRouter() // Initialize router
+  const [isHovered, setIsHovered] = useState(false)
+  
+  const getButtonStyles = () => {
+    switch (variant) {
+      case "gradient":
+        return "bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 text-white"
+      case "white":
+        return "bg-white text-[#1A1A2E]"
+      default:
+        return "bg-[#1A1A2E] text-white border border-gray-800"
+    }
+  }
+  
+  // onclick bring to /upload page
+  const handleClick = () => {
+    router.push("/upload")
+  }
+  
   return (
-    <button className="flex items-center hover:scale-105 justify-center gap-2 p-3 bg-black rounded-md shadow-xl border-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-        </svg>
-
-        <h1 className='font-semibold text-xs text-white'>Upload Resume</h1>
-    </button>
+    <motion.button
+      className={`
+        relative overflow-hidden rounded-full py-4 px-8 font-medium text-lg
+        shadow-lg flex items-center justify-center gap-3
+        ${getButtonStyles()}
+      `}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick} // Add onClick handler
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      {/* Glow effect */}
+      <div className="absolute inset-0 w-full h-full opacity-30">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f0f0f0]/20 to-[#0c3792]/20 blur-md"></div>
+      </div>
+      
+      {/* Button content */}
+      <div className="relative z-10 flex items-center">
+        <motion.div animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
+          <Upload className="w-5 h-5" />
+        </motion.div>
+        
+        <motion.span className="mx-1 font-bold" animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
+          Upload Resume
+        </motion.span>
+        
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            x: isHovered ? 0 : -10,
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <ArrowRight className="w-5 h-5" />
+        </motion.div>
+      </div>
+      
+      {/* Animated border */}
+      {variant !== "gradient" && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 rounded-full border border-[#0c3792]/30 animate-pulse"></div>
+        </div>
+      )}
+    </motion.button>
   )
 }
 
 export default UploadButton
-
-

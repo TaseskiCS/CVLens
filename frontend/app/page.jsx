@@ -1,11 +1,14 @@
-"use client";
-import NavBar from "./components/Navbar/NavBar";
-import UploadButton from "./components/UploadButton/UploadButton";
-import Image from 'next/image';
-import { CopyBlock, dracula } from "react-code-blocks";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import InfoCard from "./components/InfoCard/InfoCard";
+"use client"
+
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs"
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { motion } from "framer-motion"
+import NavBar from "./components/NavBar/NavBar"
+import UploadButton from "./components/UploadButton/UploadButton"
+import InfoCard from "./components/InfoCard/InfoCard"
+import { Sparkles } from "lucide-react"
 
 const resumeData = {
   name: "NAME",
@@ -13,7 +16,7 @@ const resumeData = {
     email: "name@gmail.com",
     linkedin: "linkedin.com/in/name",
     github: "github.com/name",
-    website: "name.dev"
+    website: "name.dev",
   },
   education: [
     {
@@ -21,8 +24,8 @@ const resumeData = {
       degree: "Bachelor of Software Engineering",
       start_date: "2017",
       graduation_date: "2022",
-      extracurriculars: ["Cycling", "Lifting", "Dragon Boat", "Debate", "Soccer"]
-    }
+      extracurriculars: ["Cycling", "Lifting", "Dragon Boat", "Debate", "Soccer"],
+    },
   ],
   experience: [
     {
@@ -35,8 +38,8 @@ const resumeData = {
         "Member of core backend team for SAP Commerce Cloud",
         "Proposed, owned, and developed a new express checkout flow reducing checkout time by 70%",
         "Designed and presented a Go + gRPC microservice quick starter to increase gRPC adoption at SAP",
-        "Worked on resolving customer escalations, developing new APIs and monolith decomposition"
-      ]
+        "Worked on resolving customer escalations, developing new APIs and monolith decomposition",
+      ],
     },
     {
       job_title: "Software Developer Co-op (Backend)",
@@ -50,8 +53,8 @@ const resumeData = {
         "Built a contest generation service that generates contests based on partner configuration",
         "Reduced contest development time by 75% for partners",
         "Over 200K global participants",
-        "Reduced contest load times by 60% by designing a new authentication flow, using resource prefetching, and lazy loading below-the-fold content"
-      ]
+        "Reduced contest load times by 60% by designing a new authentication flow, using resource prefetching, and lazy loading below-the-fold content",
+      ],
     },
     {
       job_title: "Lead Software Engineer (Android)",
@@ -62,9 +65,9 @@ const resumeData = {
       bullet_points: [
         "Founding member of a startup enabling small businesses to take part in digital grocery",
         "Built an Android application for testing and product demos, resulting in $30,000 of investment",
-        "Implemented searching, filters, location selection via Google Maps, and payments via Stripe"
-      ]
-    }
+        "Implemented searching, filters, location selection via Google Maps, and payments via Stripe",
+      ],
+    },
   ],
   projects: [
     {
@@ -74,8 +77,8 @@ const resumeData = {
       tech_stack: ["AWS Rekognition", "AWS Lambda", "SNS", "Webhooks"],
       bullet_points: [
         "Used an event-driven architecture with AWS Lambda functions triggered by SNS and webhooks",
-        "Resulted in two offshoot projects: an SDK for Go and a Go HTTP Client Library"
-      ]
+        "Resulted in two offshoot projects: an SDK for Go and a Go HTTP Client Library",
+      ],
     },
     {
       name: "Project 2",
@@ -84,76 +87,318 @@ const resumeData = {
       tech_stack: ["Java"],
       bullet_points: [
         "Designed a weighted searching algorithm to determine the most relevant search results for queries",
-        "Built custom data structures for specific purposes, i.e., an AVL tree for searching for individual items"
-      ]
-    }
+        "Built custom data structures for specific purposes, i.e., an AVL tree for searching for individual items",
+      ],
+    },
   ],
   skills: {
     languages: ["Java", "Go", "Scala", "C++", "JavaScript"],
-    frameworks_and_tools: ["AWS", "GCP", "Jenkins", "MySQL", "DynamoDB", "SQS", "SNS", "AWS Lambda", "Datadog"]
-  }
-};
+    frameworks_and_tools: ["AWS", "GCP", "Jenkins", "MySQL", "DynamoDB", "SQS", "SNS", "AWS Lambda", "Datadog"],
+  },
+}
 
 export default function Home() {
-  return (
-    <>
-      <div className='h-screen'>
-        <NavBar/> 
-        <section className="TOP-SECTION flex flex-col mx-1 lg:mx-40 justify-center mb-20">
-          <div className="TOP-TEXT flex flex-col gap-4 mb-5 mx-10 text-center"> { /*max-w-[800px]*/ }
-              <div className="HEADER text-3xl font-bold flex justify-center mt-20 text-center w">
-                <h3>Transform Your Resume into Structured Data</h3>
-              </div>
-              <div className="SUB-HEADER font-semibold">
-                <h1>Upload your resume and let our AI powered system extract, analyze, and organize your professional information into a structured format.</h1>
-              </div>
-          </div>
-          <div className="flex justify-center">
-              <UploadButton/>
-          </div>
-        </section>
-        <section className="SAMPLE-PREVIEW flex flex-col md:flex-row justify-center items-center gap-10 bg-slate-200">
-          {/* Image Container */}
-          <div className="flex flex-col md:flex-row justify-center items-start gap-10 bg-slate-200 py-5 px-5">
-              {/* Resume Preview Image */}
-              <div className="p-1 rounded-lg text-white bg-slate-500 flex justify-center items-center shadow-lg h-[450px] w-[350px]">
-                <Image 
-                  src="/cvlens_resume.png" 
-                  alt="Resume Preview" 
-                  width={350} 
-                  height={450} 
-                  className="rounded-lg"
-                />
-              </div>
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [scrollY, setScrollY] = useState(0)
 
-              {/* Processed Data Container */}
-              <div className="p-1 rounded-lg bg-gray-900 text-white shadow-lg w-[350px] h-[450px] overflow-y-auto">
-                <SyntaxHighlighter 
-                  language="json" 
-                  style={atomOneDark} 
-                  customStyle={{ borderRadius: '8px', padding: '10px', fontSize: '14px' }}
-                >
-                  {JSON.stringify(resumeData, null, 2)}
-                </SyntaxHighlighter>
-              </div>
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-white text-white overflow-hidden">
+      {/* Background gradient */}
+      <div
+        className="fixed inset-0 opacity-50 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 255, 0.9) 0%, rgba(0, 0, 255, 0.1) 50%, rgba(0, 0, 0, 0) 80%)`,
+        }}
+      />
+
+      {/* Grid background */}
+      <div className="fixed inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10 pointer-events-none" />
+
+      <NavBar />
+
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <div className="inline-flex items-center px-3 py-1 mb-6 rounded-full bg-[#1A1A2E] border border-blue-500/30">
+              <Sparkles className="w-4 h-4 mr-2 text-blue-400" />
+              <span className="text-sm font-medium text-blue-400">AI-Powered Resume Parser</span>
             </div>
 
-        </section>
-        <section className="CARDS p-5 flex flex-col sm:flex-row justify-center gap-10 bg-slate-100">
-          <InfoCard 
-            icon="/svg/bolt.svg" 
-            title="Fast Processing" 
-            text="Get your resume processed in seconds with our enhanced AI technology"
-          />
-          <InfoCard 
-            icon="/svg/verify.svg" 
-            title="Accurate" 
-            text="High precision extraction with machine learning algorithms"
-          />
-        </section>
+            <motion.h1
+              className="text-5xl md:text-7xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
+              Transform Your Resume into Structured Data
+            </motion.h1>
 
-      </div>
-    </>
-  );
+            <motion.p
+              className="text-xl md:text-2xl font-bold text-blue-100 mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
+              Upload your resume and let our AI powered system extract, analyze, and organize your professional
+              information into a structured format.
+            </motion.p>
+            
+            <motion.div
+              className='flex justify-center'
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+            >
+              <UploadButton variant="gradient" />
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Animated shapes */}
+        <div className="absolute top-1/4 left-10 w-64 h-64 bg-white/70 rounded-full filter blur-3xl animate-blob"></div>
+        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-purple-500/40 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-blue-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+      </section>
+
+      {/* Preview Section */}
+      <section className="relative py-24 ">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-400">
+              See How It Works
+            </h2>
+            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
+              Our AI analyzes your resume and converts it into structured JSON data that can be used across platforms.
+            </p>
+          </motion.div>
+
+          <div className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16">
+            {/* Resume Preview */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
+              <div className="relative bg-[#1A1A2E] rounded-xl border border-gray-800 shadow-2xl overflow-hidden h-[450px] w-[320px] md:w-[350px] perspective-card">
+                <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent z-10"></div>
+                <Image
+                  src="/cvlens_resume.png"
+                  alt="Resume Preview"
+                  width={350}
+                  height={450}
+                  className="object-cover h-full w-full transform transition-transform duration-1000 hover:scale-110"
+                />
+              </div>
+            </motion.div>
+
+            {/* Arrow */}
+            <motion.div
+              className="hidden lg:flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="relative w-24 h-24 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] rounded-full opacity-20 animate-ping"></div>
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#1A1A2E] border border-purple-500/30 shadow-lg shadow-purple-500/20">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* JSON Output */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
+              <div className="relative bg-[#1A1A2E] rounded-xl border border-gray-800 shadow-2xl h-[450px] w-[320px] md:w-[350px] overflow-hidden perspective-card">
+                <div className="flex items-center px-4 py-3 bg-[#13131F] border-b border-gray-800">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                  </div>
+                  <div className="mx-auto pr-8 text-xs text-gray-400 font-mono">resume_data.json</div>
+                </div>
+                <div className="h-[410px] overflow-y-auto syntax-highlighter">
+                  <SyntaxHighlighter
+                    language="json"
+                    style={atomOneDark}
+                    customStyle={{
+                      background: "transparent",
+                      padding: "16px",
+                      fontSize: "13px",
+                      height: "100%",
+                    }}
+                  >
+                    {JSON.stringify(resumeData, null, 2)}
+                  </SyntaxHighlighter>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Animated lines */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-20"></div>
+          <div className="absolute left-0 bottom-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-20"></div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="relative py-24">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400">
+              Why Choose CVLens
+            </h2>
+            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
+              Our platform offers unmatched capabilities for resume parsing and data extraction.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <InfoCard
+                icon="zap"
+                title="Fast Processing"
+                text="Get your resume processed in seconds with our enhanced AI technology"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <InfoCard
+                icon="check-circle"
+                title="Accurate"
+                text="High precision extraction with machine learning algorithms"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <InfoCard
+                icon="shield"
+                title="Secure"
+                text="Your data is encrypted and never shared with third parties"
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Animated shapes */}
+        <div className="absolute top-1/3 right-10 w-64 h-64 bg-purple-500/10 rounded-full filter blur-3xl animate-blob animation-delay-3000"></div>
+        <div className="absolute bottom-1/4 left-10 w-64 h-64 bg-pink-500/10 rounded-full filter blur-3xl animate-blob animation-delay-1000"></div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A2E] to-[#0A0A14]"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#fffeff] via-[#6a8bdd] to-[#3354eb]">
+              Ready to Transform Your Resume?
+            </h2>
+            <p className="text-xl text-gray-300 mb-10">
+              Join thousands of professionals who use CVLens to streamline their job application process.
+            </p>
+            <motion.div
+              className="flex justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <UploadButton variant="gradient" />
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Animated lines */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-20"></div>
+        </div>
+      </section>
+    </div>
+  )
 }
 
