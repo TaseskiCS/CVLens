@@ -1,65 +1,213 @@
-import React from 'react'
-import NavBar from '../components/Navbar/NavBar'
-import InfoCard from '../components/InfoCard/InfoCard'
+"use client"
 
-const UploadPage = () => {
+import { motion } from "framer-motion"
+import { Upload } from "lucide-react"
+import NavBar from "../components/Navbar/NavBar"
+import InfoCard from "../components/InfoCard/InfoCard"
+import { useState, useRef } from "react" // Add useRef import here
+
+export default function UploadPage() {
+  const [isDragging, setIsDragging] = useState(false)
+  const fileInputRef = useRef(null) // Create a ref for the file input
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = () => {
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    setIsDragging(false)
+    // Handle file drop logic here
+    const files = e.dataTransfer.files
+    if (files && files.length > 0) {
+      handleFileChange({ target: { files } })
+    }
+  }
+
+  // Function to handle file selection
+  const handleFileChange = (e) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      // Process the file(s) here
+      console.log("Selected files:", files)
+      // Add your file processing logic here
+    }
+  }
+
+  // Function to trigger file input click
+  const handleBrowseClick = () => {
+    fileInputRef.current.click()
+  }
+
   return (
-    <>
-        <NavBar/>
-        <div className="flex justify-center flex-col">
-            <div className="flex flex-col justify-center text-center">
-                <h1 className="text-3xl font-bold">Upload Your Resume</h1>
-                <h2>Let Our AI analyze and optimize your resume for better jobs opportunities</h2>
-            </div>
-            <div className='flex items-center flex-col mt-10'>
-                <div className='bg-slate-400 p-5 rounded-xl'>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-                    </svg>
-                </div>
-                <h2 className="font-bold">Drag and drop your resume here</h2>
-                <h3 className='mt-5'>Or</h3>
-                <button className='bg-black rounded-xl text-white p-3 text-sm mt-2'>Browse Files</button>
-                <h3 className='mt-5'>Supported Formats: PDF, DOCX (Max 5MB)</h3>
-                <div className="flex flex-wrap gap-3">
-                    <InfoCard 
-                        icon="/svg/bolt.svg" 
-                        title="AI-Powered Analysis" 
-                        text="Our AI scans your resume and provides detailed feedback."
-                    />
-                    <InfoCard 
-                        icon="/svg/verify.svg" 
-                        title="Keyword Optimization" 
-                        text="Optimize for ATS systems and job requirements"
-                    />
-                </div>
-                <div className='flex items-center mt-10 flex-col text-center'>
-                    <h2 className="font-bold">How It Works</h2>
-                    {/* TODO: Turn these into components */}
-                    <div className='flex flex-row justify-center gap-4'>
-                        <div className='p-5 max-w-[200px] flex items-center flex-col'>
-                            <div className="bg-black p-2 w-8 h-8 flex items-center justify-center rounded-full text-white">1</div>
-                            <h2 className='text-sm font-bold'>Upload Resume</h2>
-                            <p className='text-xs'>Upload your existing resume in PDF/DOCX format</p>
-                        </div>
-                        <div className='p-5 max-w-[200px] flex items-center flex-col'>
-                            <div className="bg-black p-2 w-8 h-8 flex items-center justify-center rounded-full text-white">2</div>
-                            <h2 className='text-sm font-bold'>AI Analysis</h2>
-                            <p className='text-xs'>Our AI analyzes your content and structure</p>
-                        </div>
-                        <div className='p-5 max-w-[200px] flex items-center flex-col'>
-                            <div className="bg-black p-2 w-8 h-8 flex items-center justify-center rounded-full text-white">3</div>
-                            <h2 className='text-sm font-bold'>View Data</h2>
-                            <p className='text-xs'>View the extracted data which is sent via a JSON string</p>
-                        </div>
+    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-white">
+      <NavBar />
 
-                    </div>
-                    
-                </div>
+      {/* Hero Section */}
+      <header className="text-center py-14 px-4">
+        <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-3xl mx-auto">
+          <h1 className="text-5xl py-16 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-400">
+            Upload Your Resume
+          </h1>
+          <p className="text-xl mt-2 text-slate-100">
+            Let our model analyze your resume for better job opportunities
+          </p>
+        </motion.div>
+      </header>
+
+      {/* Upload Section */}
+      <section className="max-w-3xl mx-auto px-6 mb-16">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8"
+        >
+          <motion.div
+            className={`border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center transition-all duration-200 ${
+              isDragging ? "border-blue-500 bg-blue-50" : "border-slate-300"
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            whileHover={{ scale: 1.01 }}
+          >
+            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-4 rounded-full mb-4">
+              <Upload className="w-8 h-8 text-white" />
             </div>
-        </div>
-    </>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">Drag and drop your resume here</h2>
+            <p className="text-slate-500 mb-4">Or</p>
+            <motion.button
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleBrowseClick} // Add click handler here
+            >
+              Browse Files
+            </motion.button>
+            {/* Hidden file input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+              accept=".pdf,.docx"
+              multiple={false}
+            />
+            <p className="text-slate-500 mt-4">Supported Formats: PDF, DOCX (Max 5MB)</p>
+          </motion.div>
+
+          {/* Info Cards */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
+          >
+            <motion.div variants={fadeIn}>
+              <InfoCard
+                icon="zap"
+                title="AI-Powered Analysis"
+                text="Our AI scans your resume and provides detailed feedback."
+              />
+            </motion.div>
+            <motion.div variants={fadeIn}>
+              <InfoCard
+                icon="check-circle"
+                title="Keyword Optimization"
+                text="Knows how to pull all the essential keywords"
+              />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+       {/* How It Works */}
+       <section className="max-w-4xl mx-auto px-6 py-8 mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8"
+        >
+          <h2 className="text-2xl font-bold text-slate-800 mb-8 text-center">How It Works</h2>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="space-y-6"
+          >
+            <motion.div
+              variants={fadeIn}
+              className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl flex flex-col md:flex-row items-center gap-6"
+            >
+              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-700 to-indigo-400 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                1
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-slate-800">Upload Resume</h3>
+                <p className="text-slate-600 mt-2">Upload your existing resume in PDF/DOCX format</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl flex flex-col md:flex-row items-center gap-6"
+            >
+              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                2
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-slate-800">AI Analysis</h3>
+                <p className="text-slate-600 mt-2">Our AI analyzes your content and structure</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl flex flex-col md:flex-row items-center gap-6"
+            >
+              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                3
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-slate-800">View Data</h3>
+                <p className="text-slate-600 mt-2">View the extracted data which is sent via a JSON string</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
+    </div>
   )
 }
 
-export default UploadPage
+     
