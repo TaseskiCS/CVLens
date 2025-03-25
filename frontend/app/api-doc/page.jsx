@@ -39,7 +39,7 @@ export default function Page() {
           <p className="text-xl mt-2 text-slate-300">Powerful resume parsing API for seamless application automation</p>
           <motion.div className="mt-8" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white px-8 py-6 rounded-xl text-lg font-medium inline-flex items-center cursor-pointer">
-              Get Started <ChevronRight className="ml-2" href="/upload" />
+              Get Started <ChevronRight className="ml-2" />
             </div>
           </motion.div>
         </motion.div>
@@ -56,14 +56,14 @@ export default function Page() {
         >
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon='zap'
+              icon="zap"
               title="Simple Integration"
               text="Easy-to-use RESTful API endpoints with comprehensive documentation"
             />
           </motion.div>
           <motion.div variants={fadeIn}>
             <InfoCard
-              icon='zap'
+              icon="check-circle"
               title="Fast Processing"
               text="Parse resumes in seconds with high accuracy and precision"
             />
@@ -80,7 +80,7 @@ export default function Page() {
           variants={fadeIn}
           className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8"
         >
-          <h2 className="text-2xl font-bold text-navy-900 mb-8">How It Works</h2>
+          <h2 className="text-2xl font-bold text-navy-900 mb-8">Documentation</h2>
 
           <motion.div
             initial="hidden"
@@ -98,10 +98,10 @@ export default function Page() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-navy-800">
-                  Upload your <code className="text-navy-800 font-semibold">resume</code>
+                  Call our <code className="text-navy-800 font-semibold">API</code>
                 </h3>
                 <p className="text-slate-600 mt-2">
-                  Send your resume to our custom trained model and extract information
+                  Enter text here on how to call the api
                 </p>
               </div>
             </motion.div>
