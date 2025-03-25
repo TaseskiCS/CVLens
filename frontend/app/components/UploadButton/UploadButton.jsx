@@ -3,10 +3,12 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Upload, ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation" // Import the router
 
 const UploadButton = ({ variant = "default" }) => {
+  const router = useRouter() // Initialize router
   const [isHovered, setIsHovered] = useState(false)
-
+  
   const getButtonStyles = () => {
     switch (variant) {
       case "gradient":
@@ -17,7 +19,12 @@ const UploadButton = ({ variant = "default" }) => {
         return "bg-[#1A1A2E] text-white border border-gray-800"
     }
   }
-
+  
+  // onclick bring to /upload page
+  const handleClick = () => {
+    router.push("/upload")
+  }
+  
   return (
     <motion.button
       className={`
@@ -27,25 +34,26 @@ const UploadButton = ({ variant = "default" }) => {
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick} // Add onClick handler
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       {/* Glow effect */}
       <div className="absolute inset-0 w-full h-full opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-r ffrom-[#f0f0f0]/20 to-[#0c3792]/20 blur-md"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f0f0f0]/20 to-[#0c3792]/20 blur-md"></div>
       </div>
-
+      
       {/* Button content */}
       <div className="relative z-10 flex items-center">
         <motion.div animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
           <Upload className="w-5 h-5" />
         </motion.div>
-
+        
         <motion.span className="mx-1 font-bold" animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
           Upload Resume
         </motion.span>
-
+        
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{
@@ -57,7 +65,7 @@ const UploadButton = ({ variant = "default" }) => {
           <ArrowRight className="w-5 h-5" />
         </motion.div>
       </div>
-
+      
       {/* Animated border */}
       {variant !== "gradient" && (
         <div className="absolute inset-0 pointer-events-none">
@@ -69,4 +77,3 @@ const UploadButton = ({ variant = "default" }) => {
 }
 
 export default UploadButton
-

@@ -42,8 +42,8 @@ const NavBar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLink href="/"> Home</NavLink>
-            <NavLink href="/api">API</NavLink>
-            <NavLink href="/about">About Us</NavLink>
+            <NavLink href="/api-doc">API</NavLink>
+            <NavLink href="/about-us">About Us</NavLink>
           </div>
 
           {/* Mobile Menu Button */}
