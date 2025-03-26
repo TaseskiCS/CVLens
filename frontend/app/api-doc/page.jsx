@@ -3,9 +3,32 @@
 import { motion } from "framer-motion"
 import { Check, Clock, ChevronRight } from "lucide-react"
 import NavBar from "../components/NavBar/NavBar"
+import { useState, useEffect } from "react"
 import InfoCard from "../components/InfoCard/InfoCard"
 
 export default function Page() {
+
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+    const [scrollY, setScrollY] = useState(0)
+  
+    useEffect(() => {
+      const handleMouseMove = (e) => {
+        setMousePosition({ x: e.clientX, y: e.clientY })
+      }
+  
+      const handleScroll = () => {
+        setScrollY(window.scrollY)
+      }
+  
+      window.addEventListener("mousemove", handleMouseMove)
+      window.addEventListener("scroll", handleScroll)
+  
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove)
+        window.removeEventListener("scroll", handleScroll)
+      }
+    }, [])
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -28,6 +51,12 @@ export default function Page() {
   return (
 
     <div className="min-h-screen bg-gradient-to-b from-blue-400 to-white">
+      <div
+        className="fixed inset-0 opacity-50 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 255, 0.9) 0%, rgba(0, 0, 255, 0.1) 50%, rgba(0, 0, 0, 0) 80%)`,
+        }}
+      />
       <NavBar />
 
       {/* Hero Section */}

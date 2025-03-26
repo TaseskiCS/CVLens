@@ -120,12 +120,12 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-white text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF9F6] to-gray-700 text-white overflow-hidden">
       {/* Background gradient */}
       <div
         className="fixed inset-0 opacity-50 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 255, 0.9) 0%, rgba(0, 0, 255, 0.1) 50%, rgba(0, 0, 0, 0) 80%)`,
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgb(0, 0, 0) 0%, rgba(0, 0, 255, 0.1) 20%, rgba(0, 0, 0, 0) 70%)`,
         }}
       />
 
@@ -143,13 +143,18 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto text-center"
           >
-            <div className="inline-flex items-center px-3 py-1 mb-6 rounded-full bg-[#1A1A2E] border border-blue-500/30">
-              <Sparkles className="w-4 h-4 mr-2 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">AI-Powered Resume Parser</span>
+            <div className="relative mt-4 inline-flex items-center px-3 py-1 mb-6 rounded-full bg-[#1A1A2E] border-2 border-transparent">
+              {/* border */}
+              <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#faf9f6] to-[#faf9f6] z-0">
+                <div className="h-full w-full bg-[#1A1A2E] rounded-full"></div>
+              </div>
+              {/* text and sparkle icon */}
+              <Sparkles className="w-4 h-4 mr-2 text-gray-300 z-10" />
+              <span className="text-sm font-medium text-gray-300 z-10">AI-Powered Resume Parser</span>
             </div>
 
             <motion.h1
-              className="text-5xl md:text-7xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400"
+              className="text-5xl md:text-7xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)] font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#FAF9F6] via-[#9b9a9c] to-black"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -158,7 +163,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p
-              className="text-xl md:text-2xl font-bold text-blue-100 mb-10"
+              className="text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.3)] md:text-1xl font-bold text-gray-700 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -166,7 +171,7 @@ export default function Home() {
               Upload your resume and let our AI powered system extract, analyze, and organize your professional
               information into a structured format.
             </motion.p>
-            
+
             <motion.div
               className='flex justify-center'
               initial={{ opacity: 0, scale: 0.9 }}
@@ -179,9 +184,8 @@ export default function Home() {
         </div>
 
         {/* Animated shapes */}
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-white/70 rounded-full filter blur-3xl animate-blob"></div>
-        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-purple-500/40 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-blue-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-gray-900 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/3 left-10 w-64 h-64 bg-gray-500 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
       </section>
 
       {/* Preview Section */}
@@ -194,10 +198,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-400">
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#FAF9F6] via-[#9b9a9c] to-gray-800">
               See How It Works
             </h2>
-            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
+            <p className="text-xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] bg-clip-text text-transparent text-white max-w-2xl mx-auto">
               Our AI analyzes your resume and converts it into structured JSON data that can be used across platforms.
             </p>
           </motion.div>
@@ -308,10 +312,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400">
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#FAF9F6] via-[#9b9a9c] to-gray-800">
               Why Choose CVLens
             </h2>
-            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
+            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text text-transparent bg-gradient-to-r text-white max-w-2xl mx-auto">
               Our platform offers unmatched capabilities for resume parsing and data extraction.
             </p>
           </motion.div>
@@ -379,7 +383,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#fffeff] via-[#6a8bdd] to-[#3354eb]">
               Ready to Transform Your Resume?
             </h2>
-            <p className="text-xl text-gray-300 mb-10">
+            <p className="text-lg text-gray-300 mb-10">
               Join thousands of professionals who use CVLens to streamline their job application process.
             </p>
             <motion.div

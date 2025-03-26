@@ -12,7 +12,7 @@ const UploadButton = ({ variant = "default" }) => {
   const getButtonStyles = () => {
     switch (variant) {
       case "gradient":
-        return "bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 text-white"
+        return "bg-gradient-to-r from-[#faf9f6] via-[#9b9a9c] to-[#3e3b39] text-white"
       case "white":
         return "bg-white text-[#1A1A2E]"
       default:
@@ -47,7 +47,7 @@ const UploadButton = ({ variant = "default" }) => {
       {/* Button content */}
       <div className="relative z-10 flex items-center">
         <motion.div animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
-          <Upload className="w-5 h-5" />
+          <Upload className="w-5 h-5 text-gray-600" />
         </motion.div>
         
         <motion.span className="mx-1 font-bold" animate={{ x: isHovered ? -5 : 0 }} transition={{ duration: 0.3 }}>
