@@ -31,7 +31,7 @@ const NavBar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <motion.span
-              className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)] font-bold bg-clip-text text-transparent bg-gradient-to-r bg-gradient-to-r from-[#FAF9F6] via-[#9b9a9c] to-black"
+              className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)] font-bold bg-clip-text text-transparent bg-gradient-to-r bg-gradient-to-r from-[#212529] via-[#495057] to-[#6c757d]"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >

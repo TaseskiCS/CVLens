@@ -71,17 +71,17 @@ export default function AboutUs() {
   const team = [
     {
       name: "Gurshan Sidhar",
-      role: "Frontend",
+      role: "Frontend Developer",
       image: "/images/gurshan_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/gurshan-sidhar",
         github: "https://github.com/GurshanSidhar7",
-        portfolio: "https://www.google.com/search?q=funny+monkey",
+        portfolio: "https://gurshansidhar.com",
       },
     },
     {
       name: "Antonio Taseski",
-      role: "Full Stack, ML",
+      role: "Full Stack, Machine Learning",
       image: "/images/tony_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/antonio-taseski-8ba015290/",
@@ -91,22 +91,22 @@ export default function AboutUs() {
     },
     {
       name: "Michael Marsillo",
-      role: "Frontend",
+      role: "Frontend Developer",
       image: "/images/mike_linkedin.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/michaelmarsillo/",
         github: "https://github.com/michaelmarsillo",
-        portfolio: "https://www.google.com/search?q=funny+monkey",
+        portfolio: "https://michaelmarsillo.ca",
       },
     },
     {
       name: "Max Posadas",
-      role: "ML",
+      role: "Machine Learning",
       image: "/images/max_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/maxwell-posadas8/",
         github: "https://github.com/maxposadas",
-        portfolio: "https://www.google.com/search?q=funny+monkey",
+        portfolio: "",
       },
     },
   ]
@@ -135,93 +135,93 @@ export default function AboutUs() {
           <div className="max-w-6xl w-full px-4 backdrop-blur-sm py-16 rounded-xl bg-black/10">
             {/* Initial centered logo that moves left */}
             <motion.div
-            className="flex flex-col items-center w-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="w-full flex justify-center overflow-hidden">
-              <motion.div
-                className="flex flex-col justify-center lg:flex-row items-center w-full lg:w-auto"
-                initial={{ x: 0 }}
-                animate={
-                  isLoaded
-                    ? {
+              className="flex flex-col items-center w-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              <div className="w-full flex justify-center overflow-hidden">
+                <motion.div
+                  className="flex flex-col justify-center lg:flex-row items-center w-full lg:w-auto"
+                  initial={{ x: 0 }}
+                  animate={
+                    isLoaded
+                      ? {
                         x: isMobile ? 0 : '0',
                         y: isMobile ? 0 : 0,
                       }
-                    : { x: 0, y: 0 }
-                }
-                transition={{
-                  duration: 1.8,
-                  delay: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  type: "spring",
-                  stiffness: 50,
-                  damping: 20,
-                }}
-              >
-                {/* Logo */}
-                <motion.div
-                  className="relative h-40 w-40 lg:h-64 lg:w-64 transform mb-6 lg:mb-0"
-                  initial={{ scale: 1.2 }}
-                  animate={isLoaded ? { scale: 1, rotate: 0 } : { scale: 1.2 }}
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                      : { x: 0, y: 0 }
+                  }
                   transition={{
-                    duration: 1.2,
+                    duration: 1.8,
                     delay: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
                     type: "spring",
-                    stiffness: 100,
-                    damping: 15,
-                  }}
-                >
-                  <Image
-                    src="/images/cvlens-logo.png"
-                    alt="CVLens Logo"
-                    fill
-                    className="object-contain drop-shadow-xl rounded-full"
-                  />
-                </motion.div>
-
-                {/* Text that appears */}
-                <motion.div
-                  className="text-center lg:text-left lg:ml-12 w-full lg:w-[500px] px-4 lg:px-0"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{
-                    duration: 1,
-                    delay: isMobile ? 0.1 : 0.4,
-                    type: "spring",
-                    stiffness: 100,
+                    stiffness: 50,
                     damping: 20,
                   }}
                 >
-                  <motion.h1
-                    className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg"
+                  {/* Logo */}
+                  <motion.div
+                    className="relative h-40 w-40 lg:h-64 lg:w-64 transform mb-6 lg:mb-0"
+                    initial={{ scale: 1.2 }}
+                    animate={isLoaded ? { scale: 1, rotate: 0 } : { scale: 1.2 }}
+                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                    transition={{
+                      duration: 1.2,
+                      delay: 0.5,
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15,
+                    }}
+                  >
+                    <Image
+                      src="/images/cvlens-logo.png"
+                      alt="CVLens Logo"
+                      fill
+                      className="object-contain drop-shadow-xl rounded-full"
+                    />
+                  </motion.div>
+
+                  {/* Text that appears */}
+                  <motion.div
+                    className="text-center lg:text-left lg:ml-12 w-full lg:w-[500px] px-4 lg:px-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.7, delay: isMobile ? 0.2 : 0.6 }}
+                    transition={{
+                      duration: 1,
+                      delay: isMobile ? 0.1 : 0.4,
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 20,
+                    }}
                   >
-                    More About{" "}
-                    <motion.span
-                      className="text-blue-400"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.7, delay: isMobile ? 0.4 : 0.8, type: "spring" }}
+                    <motion.h1
+                      className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.7, delay: isMobile ? 0.2 : 0.6 }}
                     >
-                      CVLens
-                    </motion.span>
-                  </motion.h1>
-                  <motion.p
-                    className="text-base md:text-lg lg:text-xl text-white/90 max-w-xl mx-auto lg:mx-0 drop-shadow-md"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2, delay: isMobile ? 0.2 : 0.4 }}
-                  >
-                    Our project that we built to help companies better extract the important data from Resumes
-                  </motion.p>
+                      More About{" "}
+                      <motion.span
+                        className="text-blue-400"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.7, delay: isMobile ? 0.4 : 0.8, type: "spring" }}
+                      >
+                        CVLens
+                      </motion.span>
+                    </motion.h1>
+                    <motion.p
+                      className="text-base md:text-lg lg:text-xl text-white/90 max-w-xl mx-auto lg:mx-0 drop-shadow-md"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2, delay: isMobile ? 0.2 : 0.4 }}
+                    >
+                      Our project that we built to help companies better extract the important data from Resumes
+                    </motion.p>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
               </div>
             </motion.div>
           </div>
@@ -229,6 +229,7 @@ export default function AboutUs() {
       </div>
 
       {/* Meet Our Team */}
+  
       <motion.section
         id="team"
         initial="hidden"
@@ -246,7 +247,7 @@ export default function AboutUs() {
             },
           },
         }}
-        className="py-20 px-6 bg-white"
+        className="py-20 px-6 bg-gradient-to-b from-gray-200 to-gray-300"
       >
         <motion.h2
           variants={{
@@ -326,7 +327,7 @@ export default function AboutUs() {
             },
           },
         }}
-        className="py-20 px-6 bg-gradient-to-b from-white to-navy-50"
+        className="py-20 px-6 bg-gradient-to-b from-gray-300 t0-gray-400"
       >
         <motion.h2
           variants={{
@@ -364,46 +365,23 @@ export default function AboutUs() {
         </motion.p>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: "lightbulb",
-              title: "Innovation",
-              text: "We push boundaries and embrace new ideas to create cutting-edge solutions.",
-            },
-            {
-              icon: "users",
-              title: "Collaboration",
-              text: "Together we achieve more through open communication and teamwork.",
-            },
-            {
-              icon: "rocket",
-              title: "Passion",
-              text: "We love what we do and bring enthusiasm to every challenge we face.",
-            },
-          ].map((card, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 50, scale: 0.95 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.22, 1, 0.36, 1],
-                  },
-                },
-              }}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                transition: { duration: 0.3, ease: "easeOut" },
-              }}
-            >
-              <InfoCard icon={card.icon} title={card.title} text={card.text} />
-            </motion.div>
-          ))}
+          <InfoCard
+            icon="lightbulb"
+            title="Innovation"
+            text="We push boundaries and embrace new ideas to create cutting-edge solutions."
+          />
+
+          <InfoCard
+            icon="users"
+            title="Collaboration"
+            text="Together we achieve more through open communication and teamwork."
+          />
+
+          <InfoCard
+            icon="rocket"
+            title="Passion"
+            text="We love what we do and bring enthusiasm to every challenge we face."
+          />
         </div>
       </motion.section>
     </>
