@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
-import NavBar from "../components/NavBar/NavBar"
+import NavBar from "../components/Navbar/NavBar"
 import { useState, useEffect } from "react"
 import InfoCard from "../components/InfoCard/InfoCard"
 

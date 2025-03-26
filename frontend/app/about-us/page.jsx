@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Github, Linkedin, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import NavBar from "../components/NavBar/NavBar"
+import NavBar from "../components/Navbar/NavBar"
 import InfoCard from "../components/InfoCard/InfoCard"
 import { useState, useEffect } from "react"
 // Animation variants
