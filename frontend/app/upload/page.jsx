@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Upload, Check, Copy, Download } from "lucide-react"
-import NavBar from "../components/Navbar/NavBar"
+import NavBar from "../components/NavBar/NavBar"
 import InfoCard from "../components/InfoCard/InfoCard"
 import { useState, useRef } from "react" // Add useRef import here
 
@@ -189,7 +189,7 @@ export default function UploadPage() {
 
           {isLoading && (
             <div className="mt-8 flex items-center justify-center">
-              <div className="w-8 h-8 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
+              <div className="w-8 h-8 border-t-2 border-b-2 border-black rounded-full animate-spin"></div>
             </div>
           )}
 
@@ -197,12 +197,8 @@ export default function UploadPage() {
             <div className="mt-8">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-slate-800">Parsed Data</h2>
-                {/* <Button variant="outline" size="sm" onClick={downloadJson} className="flex items-center gap-2">
-                  <Download className="h-4 w-4" />
-                  Download JSON
-                </Button> */}
                 <motion.button
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-medium"
+                  className="bg-gradient-to-r from-[#343a40] to-[#495057] hover:from-[#212529] hover:to-[#343a40] text-white px-6 py-3 rounded-xl font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={downloadJson} // Add click handler here
