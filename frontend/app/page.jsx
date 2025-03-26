@@ -120,12 +120,12 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-white text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#f8f9fa] via-[#e9ecef] to-[#212529] text-white overflow-hidden">
       {/* Background gradient */}
       <div
         className="fixed inset-0 opacity-50 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 255, 0.9) 0%, rgba(0, 0, 255, 0.1) 50%, rgba(0, 0, 0, 0) 80%)`,
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(33, 37, 41, 0.8) 0%, rgba(73, 80, 87, 0.3) 20%, rgba(0, 0, 0, 0) 70%)`,
         }}
       />
 
@@ -143,13 +143,18 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto text-center"
           >
-            <div className="inline-flex items-center px-3 py-1 mb-6 rounded-full bg-[#1A1A2E] border border-blue-500/30">
-              <Sparkles className="w-4 h-4 mr-2 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">AI-Powered Resume Parser</span>
+            <div className="relative mt-4 inline-flex items-center px-3 py-1 mb-6 rounded-full bg-[#212529] border border-gray-700">
+              {/* border */}
+              <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#dee2e6] to-[#adb5bd] z-0">
+                <div className="h-full w-full bg-[#212529] rounded-full"></div>
+              </div>
+              {/* text and sparkle icon */}
+              <Sparkles className="w-4 h-4 mr-2 text-gray-200 z-10" />
+              <span className="text-sm font-medium text-gray-200 z-10">AI-Powered Resume Parser</span>
             </div>
 
             <motion.h1
-              className="text-5xl md:text-7xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400"
+              className="text-5xl md:text-7xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.4)] font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#212529] via-[#495057] to-[#6c757d]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -158,7 +163,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p
-              className="text-xl md:text-2xl font-bold text-blue-100 mb-10"
+              className="text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.2)] md:text-1xl font-bold text-gray-600 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -166,9 +171,9 @@ export default function Home() {
               Upload your resume and let our AI powered system extract, analyze, and organize your professional
               information into a structured format.
             </motion.p>
-            
+
             <motion.div
-              className='flex justify-center'
+              className="flex justify-center"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
@@ -179,9 +184,8 @@ export default function Home() {
         </div>
 
         {/* Animated shapes */}
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-white/70 rounded-full filter blur-3xl animate-blob"></div>
-        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-purple-500/40 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-blue-500/20 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-[#343a40] rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/3 left-10 w-64 h-64 bg-[#6c757d] rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
       </section>
 
       {/* Preview Section */}
@@ -194,10 +198,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-400">
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.4)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#212529] via-[#495057] to-[#6c757d]">
               See How It Works
             </h2>
-            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
+            <p className="text-xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.3)] text-gray-600 max-w-2xl mx-auto">
               Our AI analyzes your resume and converts it into structured JSON data that can be used across platforms.
             </p>
           </motion.div>
@@ -211,8 +215,8 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
-              <div className="relative bg-[#1A1A2E] rounded-xl border border-gray-800 shadow-2xl overflow-hidden h-[450px] w-[320px] md:w-[350px] perspective-card">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#dee2e6] to-[#495057] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
+              <div className="relative bg-[#212529] rounded-xl border border-gray-700 shadow-2xl overflow-hidden h-[450px] w-[320px] md:w-[350px] perspective-card">
                 <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent z-10"></div>
                 <Image
                   src="/cvlens_resume.png"
@@ -233,8 +237,8 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="relative w-24 h-24 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] rounded-full opacity-20 animate-ping"></div>
-                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#1A1A2E] border border-purple-500/30 shadow-lg shadow-purple-500/20">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#dee2e6] to-[#495057] rounded-full opacity-20 animate-ping"></div>
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#212529] border border-gray-500/30 shadow-lg shadow-gray-500/20">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -262,9 +266,9 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#f0f0f0] to-[#0c3792] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
-              <div className="relative bg-[#1A1A2E] rounded-xl border border-gray-800 shadow-2xl h-[450px] w-[320px] md:w-[350px] overflow-hidden perspective-card">
-                <div className="flex items-center px-4 py-3 bg-[#13131F] border-b border-gray-800">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#dee2e6] to-[#495057] opacity-70 blur-lg group-hover:opacity-100 animate-pulse"></div>
+              <div className="relative bg-[#212529] rounded-xl border border-gray-700 shadow-2xl h-[450px] w-[320px] md:w-[350px] overflow-hidden perspective-card">
+                <div className="flex items-center px-4 py-3 bg-[#343a40] border-b border-gray-700">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 rounded-full bg-red-400"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
@@ -308,11 +312,11 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-4xl font-bold mb-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400">
-              Why Choose CVLens
+            <h2 className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.4)] md:text-4xl font-bold mb-2 inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#212529] via-[#495057] to-[#6c757d]">
+              Why Choose CVLens?
             </h2>
-            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 max-w-2xl mx-auto">
-              Our platform offers unmatched capabilities for resume parsing and data extraction.
+            <p className="text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.3)] text-gray-600 max-w-2xl mx-auto">
+              Our custom trained model offers greater capabilities for resume parsing and data extraction.
             </p>
           </motion.div>
 
@@ -359,13 +363,13 @@ export default function Home() {
         </div>
 
         {/* Animated shapes */}
-        <div className="absolute top-1/3 right-10 w-64 h-64 bg-purple-500/10 rounded-full filter blur-3xl animate-blob animation-delay-3000"></div>
-        <div className="absolute bottom-1/4 left-10 w-64 h-64 bg-pink-500/10 rounded-full filter blur-3xl animate-blob animation-delay-1000"></div>
+        <div className="absolute top-1/3 right-10 w-64 h-64 bg-gray-500/20 rounded-full filter blur-3xl animate-blob animation-delay-3000"></div>
+        <div className="absolute bottom-1/4 left-10 w-64 h-64 bg-gray-700/20 rounded-full filter blur-3xl animate-blob animation-delay-1000"></div>
       </section>
 
       {/* CTA Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A2E] to-[#0A0A14]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529] to-[#343a40]"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5"></div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -376,11 +380,11 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#fffeff] via-[#6a8bdd] to-[#3354eb]">
-              Ready to Transform Your Resume?
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#e9ecef] to-[#adb5bd]">
+              Ready to Parse Your Resume?
             </h2>
-            <p className="text-xl text-gray-300 mb-10">
-              Join thousands of professionals who use CVLens to streamline their job application process.
+            <p className="text-lg text-gray-300 mb-10">
+              Join the people who use CVLens to streamline their job application process.
             </p>
             <motion.div
               className="flex justify-center"
@@ -395,7 +399,7 @@ export default function Home() {
 
         {/* Animated lines */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-20"></div>
+          <div className="absolute left-0 top-0 w-full h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-20"></div>
         </div>
       </section>
     </div>

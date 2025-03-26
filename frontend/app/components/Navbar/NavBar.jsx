@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <motion.nav
-      className={`fixed backdrop-blur-xl bg-transparent top-0 left-0 right-0 z-50 transition-all duration-300 `}
+      className={" bg-[#FAF9F6] fixed backdrop-blur-xl bg-transparent top-0 left-0 right-0 z-50 transition-all duration-300"}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -31,7 +31,7 @@ const NavBar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <motion.span
-              className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400"
+              className="text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)] font-bold bg-clip-text text-transparent bg-gradient-to-r bg-gradient-to-r from-[#212529] via-[#495057] to-[#6c757d]"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -89,8 +89,8 @@ const NavBar = () => {
 const NavLink = ({ href, children }) => {
   return (
     <Link href={href} className="group relative">
-      <span className=" hover:scale-105 font-bold text-lg transition-colors duration-300">{children}</span>
-      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#fffeff] via-[#6a8bdd] to-[#3354eb] transition-all duration-300 group-hover:w-full"></span>
+      <span className="text-[#3e3b39] hover:scale-105 font-bold text-lg transition-colors duration-300">{children}</span>
+      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#fffeff] via-[#9b9a9c] to-[#3e3b39] transition-all duration-300 group-hover:w-full"></span>
     </Link>
   )
 }
