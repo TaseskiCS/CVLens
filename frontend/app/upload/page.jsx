@@ -1,14 +1,42 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Upload } from "lucide-react"
+import { Upload, Check, Copy, Download } from "lucide-react"
 import NavBar from "../components/Navbar/NavBar"
 import InfoCard from "../components/InfoCard/InfoCard"
 import { useState, useRef } from "react" // Add useRef import here
 
+
 export default function UploadPage() {
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef(null) // Create a ref for the file input
+  const [isLoading, setIsLoading] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [data, setData] = useState({
+    filename: "",
+    parsed_data: [],
+  })
+
+  const copyToClipboard = () => {
+    const jsonString = JSON.stringify(data.parsed_data, null, 2)
+    navigator.clipboard.writeText(jsonString)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const downloadJson = () => {
+    const jsonString = JSON.stringify(data.parsed_data, null, 2)
+    const blob = new Blob([jsonString], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "data.json"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -49,14 +77,52 @@ export default function UploadPage() {
   }
 
   // Function to handle file selection
-  const handleFileChange = (e) => {
-    const files = e.target.files
-    if (files && files.length > 0) {
-      // Process the file(s) here
-      console.log("Selected files:", files)
-      // Add your file processing logic here
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+
+    reader.onloadend = async () => {
+        const base64File = reader.result.split(",")[1] // Extract base64 data
+        console.log("Base64 Encoded File:", base64File.substring(0, 100) + "...") // Log only first 100 chars
+
+        const payload = {
+            filename: file.name,
+            file: base64File,
+        }
+
+        console.log("Sending payload:", payload) // Log the payload
+
+        try {
+            setIsLoading(true)
+            const response = await fetch("http://localhost:8000/upload", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            })
+
+            if (!response.ok) {
+                console.error("Error uploading file:", response.status, response.statusText)
+                return
+            }
+
+            const data = await response.json()
+            console.log("Response Data:", data)
+            setData(data)
+        } catch (error) {
+            console.error("Fetch error:", error)
+        } finally {
+          setIsLoading(false);
+        }
     }
-  }
+
+    reader.readAsDataURL(file)
+}
+
+
 
   // Function to trigger file input click
   const handleBrowseClick = () => {
@@ -120,6 +186,53 @@ export default function UploadPage() {
             />
             <p className="text-slate-500 mt-4">Supported Formats: PDF, DOCX (Max 5MB)</p>
           </motion.div>
+
+          {isLoading && (
+            <div className="mt-8 flex items-center justify-center">
+              <div className="w-8 h-8 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
+            </div>
+          )}
+
+          {!isLoading && data.filename && (
+            <div className="mt-8">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-slate-800">Parsed Data</h2>
+                {/* <Button variant="outline" size="sm" onClick={downloadJson} className="flex items-center gap-2">
+                  <Download className="h-4 w-4" />
+                  Download JSON
+                </Button> */}
+                <motion.button
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-medium"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={downloadJson} // Add click handler here
+                >
+                  Download JSON
+                </motion.button>
+              </div>
+
+              <p className="text-slate-500 mb-4">Filename: {data.filename}</p>
+
+              <div className="relative">
+                <div className="absolute right-2 top-2">
+                  <motion.button
+                    className="font-medium"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={copyToClipboard} // Add click handler here
+                  >
+                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  </motion.button>
+                  
+                </div>
+
+                <pre className="bg-slate-50 border rounded-md p-4 pt-12 text-sm text-slate-800 overflow-auto max-h-[500px]">
+                  {JSON.stringify(data.parsed_data, null, 2)}
+                </pre>
+              </div>
+            </div>
+          )}
+
 
           {/* Info Cards */}
           <motion.div
