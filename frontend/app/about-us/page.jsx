@@ -71,7 +71,7 @@ export default function AboutUs() {
   const team = [
     {
       name: "Gurshan Sidhar",
-      role: "Frontend Developer",
+      role: "Frontend",
       image: "/images/gurshan_linkedin.jpeg",
       socials: {
         linkedin: "https://www.linkedin.com/in/gurshan-sidhar",
@@ -91,7 +91,7 @@ export default function AboutUs() {
     },
     {
       name: "Michael Marsillo",
-      role: "Frontend Developer",
+      role: "Frontend",
       image: "/images/mike_linkedin.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/michaelmarsillo/",
