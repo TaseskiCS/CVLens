@@ -343,7 +343,7 @@ export default function Home() {
               Ready to Parse Your Resume?
             </h2>
             <p className="text-lg text-gray-300 mb-10">
-              Join the people who use CVLens to streamline their job application process.
+              Try CVLens today and start streamlining your job application process.
             </p>
             <motion.div
               className="flex justify-center"

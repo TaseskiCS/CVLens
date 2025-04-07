@@ -218,7 +218,7 @@ export default function AboutUs() {
                       animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                       transition={{ duration: 0.2, delay: isMobile ? 0.2 : 0.4 }}
                     >
-                      Our project that we built to help companies better extract the important data from Resumes
+                      Our project was designed to help companies easily extract and analyze important data from resumes, simplifying the hiring process and enabling more efficient, recruitment decisions.
                     </motion.p>
                   </motion.div>
                 </motion.div>
@@ -228,7 +228,7 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* Meet Our Team */}
+      {/* meet our team section */}
   
       <motion.section
         id="team"
@@ -263,7 +263,7 @@ export default function AboutUs() {
           }}
           className="text-4xl font-bold text-navy-900 text-center mb-2"
         >
-          Meet Our Team
+          The Creators
         </motion.h2>
 
         <motion.p
@@ -281,7 +281,7 @@ export default function AboutUs() {
           }}
           className="text-navy-600 text-center mb-16"
         >
-          Driven by innovation and guided by experience
+          Passionate about Web Development and Machine Learning 🚀
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -343,7 +343,7 @@ export default function AboutUs() {
           }}
           className="text-3xl font-bold text-navy-900 text-center mb-2"
         >
-          Our Values
+          A Little Backstory
         </motion.h2>
 
         <motion.p
@@ -361,26 +361,26 @@ export default function AboutUs() {
           }}
           className="text-navy-600 text-center mb-16"
         >
-          The principles that guide everything we do
+          The journey of how we came up with the idea
         </motion.p>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           <InfoCard
-            icon="lightbulb"
-            title="Innovation"
-            text="We push boundaries and embrace new ideas to create cutting-edge solutions."
+            icon="File-text"
+            title="Applying Sucks"
+            text="After submitting hundreds of applications through various company websites, we quickly noticed that the resume parsers they used were often inaccurate."
           />
 
           <InfoCard
             icon="users"
-            title="Collaboration"
-            text="Together we achieve more through open communication and teamwork."
+            title="The Idea"
+            text="Together, we wanted to create a solution that would streamline the information gathering process, benefiting both companies and job applicants."
           />
 
           <InfoCard
-            icon="rocket"
-            title="Passion"
-            text="We love what we do and bring enthusiasm to every challenge we face."
+            icon="Code"
+            title="Outcome"
+            text="We developed a custom model using Python and SpaCy that instantly and accurately parses resume information, ensuring a seamless and precise process."
           />
         </div>
       </motion.section>
