@@ -72,10 +72,10 @@ const NavBar = () => {
               <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)}>
                 Home
               </MobileNavLink>
-              <MobileNavLink href="/api" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="/api-doc" onClick={() => setIsMenuOpen(false)}>
                 API
               </MobileNavLink>
-              <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink href="/about-us" onClick={() => setIsMenuOpen(false)}>
                 About Us
               </MobileNavLink>
             </div>
