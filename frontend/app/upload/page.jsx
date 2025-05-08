@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { Upload, Check, Copy, Download } from "lucide-react"
 import NavBar from "../components/Navbar/NavBar"
 import InfoCard from "../components/InfoCard/InfoCard"
-import { useState, useRef } from "react" // Add useRef import here
+import { useState, useRef } from "react" 
 
 
 export default function UploadPage() {
