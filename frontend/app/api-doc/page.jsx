@@ -108,56 +108,74 @@ export default function Page() {
         </motion.div>
       </section>
 
-      {/* How It Works */}
       <section className="max-w-5xl mx-auto px-6 py-12">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8"
+      >
+        <h2 className="text-2xl font-bold text-[#212529] mb-8">Documentation</h2>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeIn}
-          className="bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-8"
+          variants={staggerContainer}
+          className="space-y-6"
         >
-          <h2 className="text-2xl font-bold text-[#212529] mb-8">Documentation</h2>
-
+          {/* Step 1: Call the API */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="space-y-6"
+            variants={fadeIn}
+            className="p-6 bg-gradient-to-r from-[#f8f9fa] to-[#e9ecef] rounded-xl flex flex-col md:flex-row items-start gap-6"
           >
-            <motion.div
-              variants={fadeIn}
-              className="p-6 bg-gradient-to-r from-[#f8f9fa] to-[#e9ecef] rounded-xl flex flex-col md:flex-row items-center gap-6"
-            >
-              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#343a40] to-[#495057] rounded-full flex items-center justify-center text-white font-bold text-xl">
-                1
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-[#212529]">
-                  Call our <code className="text-[#343a40] font-semibold">API</code>
-                </h3>
-                <p className="text-[#495057] mt-2">Enter text here on how to call the api</p>
-              </div>
-            </motion.div>
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#343a40] to-[#495057] rounded-full flex items-center justify-center text-white font-bold text-xl">
+              1
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-[#212529]">
+                Call our <code className="text-[#343a40] font-mono bg-gray-100 px-1 py-0.5 rounded">POST /api/parse</code> endpoint
+              </h3>
+              <pre className="mt-2 font-mono text-sm bg-gray-100 p-4 rounded whitespace-pre-wrap">
+{`fetch('https://cvlens.vercel.app/api/parse', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    filename: 'resume.pdf',
+    file: YOUR_BASE64_STRING
+  })
+});`}
+              </pre>
+            </div>
+          </motion.div>
 
-            <motion.div
-              variants={fadeIn}
-              className="p-6 bg-gradient-to-r from-[#f8f9fa] to-[#e9ecef] rounded-xl flex flex-col md:flex-row items-center gap-6"
-            >
-              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#495057] to-[#6c757d] rounded-full flex items-center justify-center text-white font-bold text-xl">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-[#212529]">
-                  Receive <code className="text-[#343a40] font-semibold">formatted information</code>
-                </h3>
-                <p className="text-[#495057] mt-2">Get parsed resume information to simplify the application process</p>
-              </div>
-            </motion.div>
+          {/* Step 2: Receive formatted information */}
+          <motion.div
+            variants={fadeIn}
+            className="p-6 bg-gradient-to-r from-[#f8f9fa] to-[#e9ecef] rounded-xl flex flex-col md:flex-row items-start gap-6"
+          >
+            <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#495057] to-[#6c757d] rounded-full flex items-center justify-center text-white font-bold text-xl">
+              2
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-[#212529]">
+                Receive <code className="text-[#343a40] font-mono bg-gray-100 px-1 py-0.5 rounded">JSON</code> response
+              </h3>
+              <pre className="mt-2 font-mono text-sm bg-gray-100 p-4 rounded whitespace-pre-wrap">
+{`{
+  "name": "John Doe",
+  "contact": { "email": "john@doe.com", "linkedin": "...", ... },
+  "education": [ ... ],
+  "experience": [ ... ],
+  "skills": ["JavaScript", "AWS", ...]
+}`}
+              </pre>
+            </div>
           </motion.div>
         </motion.div>
-      </section>
+      </motion.div>
+    </section>
     </div>
   )
 }

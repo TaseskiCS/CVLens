@@ -93,10 +93,10 @@ export default function UploadPage() {
         }
 
         console.log("Sending payload:", payload) // Log the payload
-
+        console.log("Backend URL:", process.env.BACKEND_URL) // Log the backend URL
         try {
             setIsLoading(true)
-            const response = await fetch("http://localhost:8000/upload", {
+            const response = await fetch(`/api/parse`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
