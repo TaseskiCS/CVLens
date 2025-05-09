@@ -1,51 +1,69 @@
-# CVLens
+# 🧠 CVLens – Smart Resume Parser
 
-Simply upload your resume and allow us to handle the parsing of the information!
+**CVLens** is a full-stack web application that allows users to upload resumes and automatically parses the content into structured JSON format. It's powered by modern web technologies and a custom-trained NLP model using spaCy. Whether you're an individual job seeker or a developer looking to integrate parsing functionality into your application, CVLens makes resume data extraction seamless and accessible.
 
-# Overview
-This Full Stack web app implements a file upload and processing pipeline using Next.js, FastAPI, our pretrained ML model, and uses AWS technologies like ECS Fargate, S3, API Gateway and Lambda. The architecture enables users to upload files via a frontend interface, process them through a FastAPI backend where the file gets stored in an S3 bucket, and triggers the API Gateway and Lambda function which hosts our  machine learning model to conduct data extraction. Developers may also directly use our api following our documentation via the API page on the website.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-# Architecture Diagram
-The following describes the flow of data in the system:
+## 🚀 Overview
 
-### 🧑🏽‍💻 Frontend (Next.js)
-    - Users interact with the frontend to upload a file.
-    - The frontend sends a POST request with { fileData } to the backend.
-    - Users can retrieve processed data via a GET request (/parsedData).
+CVLens simplifies the resume parsing process. Users can upload their resume through our clean frontend interface, and the backend handles data extraction using a Python-based ML pipeline. The result is a clean, structured JSON object that you can use in your applications or workflows.
 
+We also provide an API integration page for developers who want to parse resumes programmatically.
 
-### 🎒 Backend (Python, FastAPI)
-    - Receives the file from the frontend.
-    - Uploads the file to an AWS S3 bucket.
-    - Responds to frontend requests for parsed data.
-
-
-### 🪣 AWS S3 Bucket
-    - Stores uploaded files.
-    - Sends a POST request with { bucketData } to the API Gateway.
-
-
-### 🔗 API Gateway & AWS Lambda
-    - API Gateway triggers a Lambda function when new data is available.
-    - The Lambda function processes the data and forwards it to an ML model.
-
-
-### 🤖 Machine Learning Model
-    - Receives data from the Lambda function.
-    - Performs analysis and returns processed results.
-
-
-### 📥 Data Retrieval
-    - The backend provides an endpoint (/process-resume) for processing data.
-
-
-# Technologies Used
-### ⚙️ Stack
-- **Frontend:** Next.js
-- **Backend:** Node.js, Express.js
-- **Cloud Storage:** AWS ECS Fargate, S3
-- **Serverless Compute:** AWS Lambda
-- **API Management:** AWS API Gateway
-- **Machine Learning:** Custom pretrained ML Model
 ---
+
+## 🖼 Architecture
+
+### 🧑🏽‍💻 Frontend (Next.js + Tailwind CSS)
+- Built with **Next.js** for fast and dynamic UI rendering.
+- Tailwind CSS for sleek, responsive design.
+- Uploads resume files directly to the backend.
+- Displays the structured JSON output after parsing.
+
+### 🧠 Backend (FastAPI + spaCy)
+- Receives and processes uploaded resume files.
+- Uses a pretrained NLP model (spaCy) to extract entities like name, skills, experience, and education.
+- Returns structured data in a JSON format.
+- Dockerized for portability and easy deployment.
+
+---
+
+## 🌐 API Integration
+
+Want to integrate CVLens into your own app? Simply send a POST request with the base64-encoded resume file:
+
+```js
+fetch('https://cvlens.vercel.app/api/parse', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    filename: 'resume.pdf',
+    file: YOUR_BASE64_STRING
+  })
+});
+```
+## Example Response:
+
+```js
+{
+  "name": "John Doe",
+  "contact": { "email": "john@doe.com", "linkedin": "...", ... },
+  "education": [ ... ],
+  "experience": [ ... ],
+  "skills": ["JavaScript", "AWS", ...]
+}
+```
+---
+## 🛠 Teach Stack
+- **Frontend:** Next.js, Tailwind CSS, JavaScript
+- **Backend:** Python, FastAPI, spaCy
+- **Containerization:** Docker
+- **Version Control:** Git
+---
+
+## 🤝 Contribution
+If you're interested in contributing, feel free to open a PR or create an issue. We welcome improvements to parsing accuracy, UI enhancements, or documentation help.
+
+
+
 
