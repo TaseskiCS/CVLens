@@ -54,7 +54,7 @@ fetch('https://cvlens.vercel.app/api/parse', {
 }
 ```
 ---
-## 🛠 Teach Stack
+## 🛠 Tech Stack
 - **Frontend:** Next.js, Tailwind CSS, JavaScript
 - **Backend:** Python, FastAPI, spaCy
 - **Containerization:** Docker
