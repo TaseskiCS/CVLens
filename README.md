@@ -22,7 +22,7 @@ We also provide an API integration page for developers who want to parse resumes
 
 ### 🧠 Backend (FastAPI + spaCy)
 - Receives and processes uploaded resume files.
-- Uses a pretrained NLP model (spaCy) to extract entities like name, skills, experience, and education.
+- Uses our custom trained NLP model (built with spaCy) to extract entities like name, skills, experience, and education.
 - Returns structured data in a JSON format.
 - Dockerized for portability and easy deployment.
 
