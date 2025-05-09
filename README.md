@@ -1,6 +1,6 @@
 # 🧠 CVLens – Smart Resume Parser
 
-**CVLens** is a full-stack web application that allows users to upload resumes and automatically parses the content into structured JSON format. It's powered by modern web technologies and a custom-trained NLP model using spaCy. Whether you're an individual job seeker or a developer looking to integrate parsing functionality into your application, CVLens makes resume data extraction seamless and accessible.
+**CVLens** is a full-stack web application that allows users to upload resumes and automatically parses the content into a structured JSON format. It's powered by modern web technologies and a custom-trained NLP model using spaCy. Whether you're an individual job seeker or a developer looking to integrate parsing functionality into your application, CVLens makes resume data extraction seamless and accessible.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
